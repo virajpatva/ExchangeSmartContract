@@ -22,7 +22,7 @@ contract ExchangeContract{
 
     function USDTtoETH (uint EthQty) public payable{
         require(address(this).balance >= EthQty,"Invalid Quantity");
-        uint latestPrice = uint(PriceFeedInstance.getLatestPrice());
+        uint latestPrice= uint(PriceFeedInstance.getLatestPrice());
         uint USDTQty = latestPrice * EthQty;
         USDTContractInstance.transferFrom(msg.sender,address(this),USDTQty);
         payable (msg.sender).transfer(EthQty * 10 ** 18);

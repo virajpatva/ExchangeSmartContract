@@ -8,7 +8,7 @@ contract USDT is ERC20, Ownable {
     constructor() ERC20("USDT", "USD") {}
 
     function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
+        _mint(to, amount * 10 ** decimals());
     }
 
     function decimals() public view virtual override returns (uint8) {

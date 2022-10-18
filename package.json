@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@chainlink/contracts": "^0.5.1",
-    "@openzeppelin/contracts": "^4.7.3"
+    "@openzeppelin/contracts": "^4.7.3",
+    "dotenv": "^16.0.3",
+    "web3": "^1.8.0"
   }
 }

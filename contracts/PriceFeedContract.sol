@@ -11,25 +11,34 @@ contract PriceConsumerV3 {
      * Network: Goerli
      * Aggregator: ETH/USD
      * Address: 0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e
+     * Address : 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419 (Mainnet)
+     * Address : 0x3E7d1eAB13ad0104d2750B8863b489D65364e32D (USDT/USD)
      */
-    constructor() {
-        priceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
+    
+    constructor(address aggregator) {
+        priceFeed = AggregatorV3Interface(aggregator);
     }
-
+   
     /**
      * Returns the latest price
      */
-    function getLatestPrice() public view returns (int) {
+   
+    function getLatestPrice() public view returns (int price)  {
         (
-            /*uint80 roundID*/,
-            int price,
+            /*uint80 roundID, */,
+            price,
             /*uint startedAt*/,
             /*uint timeStamp*/,
             /*uint80 answeredInRound*/
         ) = priceFeed.latestRoundData();
-        return price;
+        
     }
 
+    function getLatestPrice(address aggregator) public view returns(int price){
+        AggregatorV3Interface dynamicPriceFeed = AggregatorV3Interface(aggregator);
+        (,price,,,) = dynamicPriceFeed.latestRoundData();
+    }
+    
     /* 
     
     function getDerivedPrice(address _base, address _quote, uint8 _decimals)
