@@ -2,16 +2,16 @@
 pragma solidity ^0.8.7;
 import "./PriceFeedContract.sol";
 import "./USDTContract.sol";
-
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract ExchangeContract{ 
 
     PriceConsumerV3 PriceFeedInstance;
-    USDT USDTContractInstance;
+    IERC20 USDTContractInstance;
     address owner ; 
 
     constructor(address PriceFeedAddress,address USDTContractAddress){
         PriceFeedInstance = PriceConsumerV3(PriceFeedAddress);      
-        USDTContractInstance = USDT(USDTContractAddress);
+        USDTContractInstance = IERC20(USDTContractAddress);
         owner = msg.sender;
     }
 
@@ -21,8 +21,8 @@ contract ExchangeContract{
     }
 
     function USDTtoETH (uint EthQty) public payable{
-        require(address(this).balance >= EthQty,"Invalid Quantity");
-        uint latestPrice= uint(PriceFeedInstance.getLatestPrice());
+        require(address(this).balance >= EthQty * 10 ** 18,"Invalid Quantity");
+        uint latestPrice = uint(PriceFeedInstance.getLatestPrice());
         uint USDTQty = latestPrice * EthQty;
         USDTContractInstance.transferFrom(msg.sender,address(this),USDTQty);
         payable (msg.sender).transfer(EthQty * 10 ** 18);
