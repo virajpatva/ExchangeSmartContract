@@ -8,6 +8,10 @@ contract WrappedBTC is ERC20, Ownable {
     constructor() ERC20("Wrapped BTC", "wBTC") {}
 
     function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
+        _mint(to, amount * 10 ** decimals());
+    }
+
+    function decimals() public view virtual override returns (uint8) {
+        return 8;
     }
 }
