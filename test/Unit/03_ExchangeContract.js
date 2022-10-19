@@ -77,6 +77,6 @@ const truffleAssert = require('truffle-assertions');
         ); 
         await contractInstance.TransferUSDT({from : accounts[0]});
         ownerBalance = await USDTTokenInstance.balanceOf(accounts[0]);
-        assert(ownerBalance,price);
+        assert.equals(ownerBalance,price);
     });
 });

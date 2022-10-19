@@ -59,7 +59,7 @@ contract ExchangeContract {
         USDTContractInstance.transfer(msg.sender, contractBalance);
     }
 
-    function TransferwBTC() public onlyOwner {
+    function TransferwBTC() public OnlyOwner {
         uint256 contractBalance = wBTCInstance.balanceOf(address(this));
         require(contractBalance > 0, "Zero Balance");
         wBTCInstance.transfer(msg.sender, contractBalance);
