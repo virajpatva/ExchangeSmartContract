@@ -9,9 +9,9 @@ const NetworkConfig = {
     "5" : { 
         name : "goerli",
         ETH_USD : "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e",
-        USDT_USD : "0xAb5c49580294Aff77670F839ea425f5b78ab3Ae7",
+        USDT_USD : "0xAb5c49580294Aff77670F839ea425f5b78ab3Ae7", //usdc-usd
         BTC_ETH : "0x779877A7B0D9E8603169DdbD7836e478b4624789",
-        ETH_BTC : "0xAc559F25B1619171CbC396a50854A3240b6A4e99"
+        ETH_BTC : "0xAc559F25B1619171CbC396a50854A3240b6A4e99" //not working
     }
 
 }
