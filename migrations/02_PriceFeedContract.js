@@ -1,5 +1,4 @@
 const PriceFeedContract = artifacts.require("PriceConsumerV3");
-
 require('dotenv').config("");
 const { NetworkConfig } = require('../helper-truffle-config.js');
 const Web3 = require("web3");
