@@ -35,14 +35,18 @@ const chainID = config.network_id;
     });
 
     it("Can't withdraw ether from another account ", async () => {
-      truffleAssert.fails(
-        contractInstance.WithdrawEth.sendTransaction({ from: accounts[1] })
+      await truffleAssert.reverts(
+        contractInstance.WithdrawEth.sendTransaction({ from: accounts[1] }),
+        "Only Owner"
       );
     });
 
     it("Can withdraw ether from owner account ", async () => {
       truffleAssert.passes(
-        contractInstance.WithdrawEth.sendTransaction({ from: accounts[0] })
+        contractInstance.WithdrawEth.sendTransaction(
+          { from: accounts[0] },
+          "Eth to owner transfer failed"
+        )
       );
     });
 
@@ -74,7 +78,10 @@ const chainID = config.network_id;
       tokenContract = await USDTTokenInstance.balanceOf.call(
         contractInstance.address
       );
-      assert(tokenContract.toString() == price.toString() && bal1 < bal);
+      assert(
+        tokenContract.toString() == price.toString() && bal1 < bal,
+        "Tokens- Eth swap failed"
+      );
     });
 
     it("Tranfer USDT to owner", async () => {
@@ -85,7 +92,10 @@ const chainID = config.network_id;
         from: accounts[0],
       });
       tokenUser = await USDTTokenInstance.balanceOf.call(accounts[0]);
-      assert(tokenContract.toString() == tokenUser.toString());
+      assert(
+        tokenContract.toString() == tokenUser.toString(),
+        "USDT to owner transfer failed"
+      );
     });
   }
 );
